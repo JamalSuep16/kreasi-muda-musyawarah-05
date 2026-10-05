@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kreasimuda Musyawarah 05 | Karang Taruna</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#C8102E',
+                        primaryDark: '#990B21',
+                        secondary: '#0C2340',
+                        cream: '#FDF8F0',
+                        accent: '#E6A100',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FDF8F0;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #FDF8F0; }
+        ::-webkit-scrollbar-thumb { background: #0C2340; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #C8102E; }
+
+        /* Glassmorphism utilities */
+        .glass {
+            background: rgba(253, 248, 240, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(230, 161, 0, 0.2);
+        }
+        .glass-dark {
+            background: rgba(12, 35, 64, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(230, 161, 0, 0.1);
+        }
+
+        /* Scroll Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* Animated Text Gradient */
+        .text-gradient {
+            background: linear-gradient(to right, #C8102E, #E6A100, #C8102E);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradientMove 3s linear infinite;
+        }
+        @keyframes gradientMove {
+            to { background-position: 200% center; }
+        }
+
+        /* Image Hover Overlay */
+        .img-overlay {
+            background: linear-gradient(to top, rgba(12,35,64,0.9) 0%, rgba(12,35,64,0.4) 50%, transparent 100%);
+        }
+    </style>
+</head>
+<body class="antialiased text-secondary selection:bg-primary selection:text-white">
+
+    <header class="fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="glass mx-auto mt-4 max-w-7xl rounded-full px-6 py-3 shadow-lg flex items-center justify-between">
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-cream shadow-md group-hover:rotate-12 transition-transform">
+                    <i class="fa-solid fa-users font-bold text-lg text-accent"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-[10px] font-bold text-primary uppercase tracking-widest leading-none">Karang Taruna</span>
+                    <span class="text-lg font-display font-black text-secondary leading-tight">Kreasimuda 05</span>
+                </div>
+            </a>
+            
+            <nav class="hidden md:flex gap-8 font-semibold text-sm">
+                <a href="#home" class="hover:text-primary transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all">Beranda</a>
+                <a href="#tentang" class="hover:text-primary transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all">Tentang Kami</a>
+                <a href="#galeri" class="hover:text-primary transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all">Kegiatan</a>
+                <a href="#sponsor" class="hover:text-primary transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all">Sponsor</a>
+                <a href="#komentar" class="hover:text-primary transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all">Komentar</a>
+            </nav>
+            
+            <a href="#komentar" class="hidden md:inline-flex items-center justify-center px-5 py-2.5 bg-secondary text-cream text-sm font-bold rounded-full hover:bg-primary transition-colors shadow-md hover:shadow-lg">
+                Sapa Kami
+            </a>
+
+            <button class="md:hidden text-secondary text-2xl focus:outline-none" id="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden absolute top-20 left-4 right-4 glass rounded-2xl p-4 hidden flex-col gap-4 shadow-2xl opacity-0 transition-opacity" id="mobile-menu">
+            <a href="#home" class="font-bold text-secondary p-2 hover:bg-white/50 rounded-lg">Beranda</a>
+            <a href="#tentang" class="font-bold text-secondary p-2 hover:bg-white/50 rounded-lg">Tentang Kami</a>
+            <a href="#galeri" class="font-bold text-secondary p-2 hover:bg-white/50 rounded-lg">Kegiatan</a>
+            <a href="#sponsor" class="font-bold text-secondary p-2 hover:bg-white/50 rounded-lg">Sponsor</a>
+            <a href="#komentar" class="font-bold text-secondary p-2 hover:bg-white/50 rounded-lg">Komentar</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
+            <!-- Decorative Blobs -->
+            <div class="absolute top-20 left-10 w-72 h-72 bg-accent/20 rounded-full mix-blend-multiply filter blur-2xl animate-blob"></div>
+            <div class="absolute top-40 right-10 w-72 h-72 bg-primary/20 rounded-full mix-blend-multiply filter blur-2xl animate-blob animation-delay-2000"></div>
+            <div class="absolute -bottom-8 left-40 w-72 h-72 bg-secondary/10 rounded-full mix-blend-multiply filter blur-2xl animate-blob animation-delay-4000"></div>
+
+            <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+                
+                <!-- Hero Text -->
+                <div class="space-y-8 text-center lg:text-left pt-10 lg:pt-0">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 border border-accent/30 shadow-sm reveal">
+                        <span class="flex h-2.5 w-2.5 relative">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+                        </span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-secondary">Semangat Pemuda RT 05</span>
+                    </div>
+
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-black leading-[1.1] reveal reveal-delay-1">
+                        Satu Langkah <br>
+                        <span class="text-gradient">Ribuan Karya</span>
+                    </h1>
+
+                    <p class="text-lg md:text-xl text-secondary/70 font-medium max-w-xl mx-auto lg:mx-0 reveal reveal-delay-2">
+                        Wadah kreativitas, inovasi, dan solidaritas pemuda Karang Taruna Kreasimuda Musyawarah 05. Mengabdi dengan semangat kebersamaan.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start reveal reveal-delay-3">
+                        <a href="#galeri" class="px-8 py-4 bg-primary text-cream font-bold rounded-2xl shadow-lg shadow-primary/30 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
+                            Lihat Karya <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="#sponsor" class="px-8 py-4 bg-white text-secondary font-bold rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-handshake text-accent"></i> Sponsor Kami
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative reveal reveal-delay-2">
+                    <div class="relative rounded-[2rem] overflow-hidden shadow-2xl animate-float border-8 border-white">
+                        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Pemuda Karang Taruna" 
+                             class="w-full h-[500px] object-cover">
+                        
+                        <!-- Floating Badge inside image -->
+                        <div class="absolute bottom-6 -left-6 lg:-left-12 bg-white/90 backdrop-blur p-4 rounded-2xl shadow-xl flex items-center gap-4 border border-white">
+                            <div class="w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center text-xl shadow-inner">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-secondary text-lg">Solidaritas</h4>
+                                <p class="text-xs font-bold text-primary">100% Terjaga</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tentang" class="py-24 bg-white relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                    <h2 class="text-primary font-bold tracking-widest text-sm uppercase mb-2">Profil Organisasi</h2>
+                    <h3 class="text-4xl md:text-5xl font-display font-black text-secondary">Tentang Kreasimuda 05</h3>
+                    <div class="w-24 h-1.5 bg-accent mx-auto mt-6 rounded-full"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6 reveal">
+                        <p class="text-lg text-secondary/80 leading-relaxed">
+                            <strong class="text-secondary font-bold text-xl">Kreasimuda Musyawarah 05</strong> adalah rumah bagi para pemuda yang ingin berkarya dan berkontribusi nyata untuk lingkungan RT 05. 
+                        </p>
+                        <p class="text-secondary/70 leading-relaxed">
+                            Berdiri dengan asas kekeluargaan, kami aktif mengadakan berbagai kegiatan mulai dari perlombaan kemerdekaan, karnaval budaya, hingga kegiatan sosial keagamaan. Motto kami: <span class="font-bold italic text-primary">"Vox Populi Vox Dei"</span>.
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-4 pt-6">
+                            <div class="bg-cream p-5 rounded-2xl border border-accent/20">
+                                <i class="fa-solid fa-hands-holding-circle text-3xl text-accent mb-3"></i>
+                                <h4 class="font-bold text-secondary mb-1">Gotong Royong</h4>
+                                <p class="text-xs text-secondary/60">Bersama membangun lingkungan aman & nyaman.</p>
+                            </div>
+                            <div class="bg-cream p-5 rounded-2xl border border-accent/20">
+                                <i class="fa-solid fa-lightbulb text-3xl text-primary mb-3"></i>
+                                <h4 class="font-bold text-secondary mb-1">Inovatif</h4>
+                                <p class="text-xs text-secondary/60">Kreativitas tanpa batas pemuda masa kini.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 reveal reveal-delay-1">
+                        <img src="https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Kegiatan" class="rounded-3xl shadow-lg h-64 w-full object-cover mt-8 hover:scale-105 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Meeting" class="rounded-3xl shadow-lg h-64 w-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="galeri" class="py-24 bg-cream">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 reveal">
+                    <div>
+                        <h2 class="text-primary font-bold tracking-widest text-sm uppercase mb-2">Dokumentasi</h2>
+                        <h3 class="text-4xl md:text-5xl font-display font-black text-secondary">Galeri Kegiatan</h3>
+                    </div>
+                    <p class="text-secondary/70 max-w-sm md:text-right text-sm">
+                        Momen keseruan dan kebersamaan Karang Taruna Kreasimuda Musyawarah 05.
+                    </p>
+                </div>
+
+                <!-- Gallery Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Item 1 -->
+                    <div class="group relative rounded-3xl overflow-hidden shadow-lg aspect-[4/3] reveal">
+                        <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80" alt="Karnaval" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 img-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                            <span class="text-accent font-bold text-xs tracking-widest mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">AGUSTUS 2026</span>
+                            <h4 class="text-white font-display font-bold text-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Karnaval Budaya</h4>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="group relative rounded-3xl overflow-hidden shadow-lg aspect-[4/3] reveal reveal-delay-1">
+                        <img src="https://images.unsplash.com/photo-1561489413-985b06da5bee?auto=format&fit=crop&w=800&q=80" alt="Lomba" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 img-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                            <span class="text-accent font-bold text-xs tracking-widest mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">17 AGUSTUS</span>
+                            <h4 class="text-white font-display font-bold text-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Pemenang Lomba</h4>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="group relative rounded-3xl overflow-hidden shadow-lg aspect-[4/3] reveal reveal-delay-2">
+                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Day 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 img-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                            <span class="text-accent font-bold text-xs tracking-widest mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">DOKUMENTASI</span>
+                            <h4 class="text-white font-display font-bold text-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Kegiatan Day-1</h4>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="group relative rounded-3xl overflow-hidden shadow-lg aspect-[4/3] reveal">
+                        <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=800&q=80" alt="Day 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 img-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                            <span class="text-accent font-bold text-xs tracking-widest mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">DOKUMENTASI</span>
+                            <h4 class="text-white font-display font-bold text-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Kegiatan Day-2</h4>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 5 -->
+                    <div class="group relative rounded-3xl overflow-hidden shadow-lg aspect-[4/3] reveal reveal-delay-1 sm:col-span-2 lg:col-span-2">
+                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Trip" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 img-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <span class="text-accent font-bold text-xs tracking-widest mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">TRIP BERSAMA</span>
+                            <h4 class="text-white font-display font-bold text-2xl translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Eksplorasi & Makrab</h4>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="sponsor" class="py-24 bg-secondary relative overflow-hidden">
+            <!-- Background Elements -->
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary/20 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
+
+            <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
+                <div class="reveal">
+                    <span class="px-4 py-2 rounded-full bg-accent/20 text-accent font-bold text-xs uppercase tracking-widest border border-accent/30 mb-6 inline-block">Official Partners</span>
+                    <h2 class="text-4xl md:text-5xl font-display font-black text-white mb-16">Welcoming Our Sponsor</h2>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    
+                    <!-- Cimory -->
+                    <div class="glass-dark p-8 rounded-3xl shadow-xl hover:-translate-y-2 hover:shadow-2xl hover:border-accent/50 transition-all duration-300 group reveal">
+                        <div class="h-32 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-inner overflow-hidden relative">
+                            <div class="absolute inset-0 bg-blue-500/10 group-hover:bg-blue-500/0 transition-colors"></div>
+                            <h3 class="text-3xl font-black text-blue-600 font-display italic tracking-tighter group-hover:scale-110 transition-transform">Cimory</h3>
+                        </div>
+                        <h4 class="text-white font-bold text-lg mb-1">Cimory</h4>
+                        <p class="text-secondary/50 text-xs font-semibold text-slate-400">Susu & Yogurt Nutrisi</p>
+                    </div>
+
+                    <!-- Kapal Api -->
+                    <div class="glass-dark p-8 rounded-3xl shadow-xl hover:-translate-y-2 hover:shadow-2xl hover:border-accent/50 transition-all duration-300 group reveal reveal-delay-1">
+                        <div class="h-32 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-inner overflow-hidden relative">
+                            <div class="absolute inset-0 bg-red-500/10 group-hover:bg-red-500/0 transition-colors"></div>
+                            <h3 class="text-2xl font-black text-red-600 font-display uppercase tracking-widest group-hover:scale-110 transition-transform">Kapal Api</h3>
+                        </div>
+                        <h4 class="text-white font-bold text-lg mb-1">Kopi Kapal Api</h4>
+                        <p class="text-secondary/50 text-xs font-semibold text-slate-400">Jelas Lebih Enak</p>
+                    </div>
+
+                    <!-- Makan Ikan 678 -->
+                    <div class="glass-dark p-8 rounded-3xl shadow-xl hover:-translate-y-2 hover:shadow-2xl hover:border-accent/50 transition-all duration-300 group reveal reveal-delay-2">
+                        <div class="h-32 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-inner overflow-hidden relative">
+                            <div class="absolute inset-0 bg-amber-500/10 group-hover:bg-amber-500/0 transition-colors"></div>
+                            <h3 class="text-xl font-black text-amber-500 font-display uppercase group-hover:scale-110 transition-transform text-center leading-tight">Makan Ikan<br><span class="text-2xl">678</span></h3>
+                        </div>
+                        <h4 class="text-white font-bold text-lg mb-1">Makan Ikan 678</h4>
+                        <p class="text-secondary/50 text-xs font-semibold text-slate-400">Kuliner Sehat & Lezat</p>
+                    </div>
+
+                    <!-- AA Kebab -->
+                    <div class="glass-dark p-8 rounded-3xl shadow-xl hover:-translate-y-2 hover:shadow-2xl hover:border-accent/50 transition-all duration-300 group reveal reveal-delay-3">
+                        <div class="h-32 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-inner overflow-hidden relative">
+                            <div class="absolute inset-0 bg-primary/10 group-hover:bg-primary/0 transition-colors"></div>
+                            <h3 class="text-3xl font-black text-primary font-display uppercase italic group-hover:scale-110 transition-transform">AA Kebab</h3>
+                        </div>
+                        <h4 class="text-white font-bold text-lg mb-1">AA Kebab</h4>
+                        <p class="text-secondary/50 text-xs font-semibold text-slate-400">Kebab Khas Pilihan</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="komentar" class="py-24 bg-white relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                    <h2 class="text-primary font-bold tracking-widest text-sm uppercase mb-2">Suara Publik</h2>
+                    <h3 class="text-4xl md:text-5xl font-display font-black text-secondary">Buku Tamu Digital</h3>
+                    <p class="mt-4 text-secondary/70">Tinggalkan pesan, kritik, atau saran untuk Karang Taruna Kreasimuda Musyawarah 05.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-5 gap-12">
+                    
+                    <!-- Form -->
+                    <div class="lg:col-span-2 reveal">
+                        <div class="bg-cream p-8 rounded-[2rem] shadow-xl border border-accent/20">
+                            <h4 class="font-bold text-xl text-secondary mb-6"><i class="fa-solid fa-pen-nib text-primary mr-2"></i> Tulis Pesan</h4>
+                            <form id="commentForm" class="space-y-5">
+                                <div>
+                                    <label class="block text-xs font-bold text-secondary uppercase mb-2">Nama Anda</label>
+                                    <input type="text" id="guestName" required class="w-full px-5 py-3 rounded-xl bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm" placeholder="John Doe">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-secondary uppercase mb-2">Peran / Status</label>
+                                    <select id="guestRole" class="w-full px-5 py-3 rounded-xl bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm appearance-none cursor-pointer">
+                                        <option value="Warga RT 05">Warga RT 05</option>
+                                        <option value="Pemuda / Anggota">Pemuda / Anggota</option>
+                                        <option value="Sponsor">Sponsor</option>
+                                        <option value="Tamu">Tamu / Pengunjung</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-secondary uppercase mb-2">Pesan</label>
+                                    <textarea id="guestMsg" rows="4" required class="w-full px-5 py-3 rounded-xl bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm resize-none" placeholder="Tuliskan pesan penyemangat di sini..."></textarea>
+                                </div>
+                                <button type="submit" class="w-full py-4 bg-secondary text-cream font-bold rounded-xl shadow-lg hover:bg-primary transition-colors flex justify-center items-center gap-2 group">
+                                    Kirim Pesan <i class="fa-solid fa-paper-plane group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Comments List -->
+                    <div class="lg:col-span-3 reveal reveal-delay-1">
+                        <div class="flex items-center justify-between mb-6 px-2">
+                            <h4 class="font-bold text-xl text-secondary">Pesan Masuk <span class="bg-primary text-white text-xs px-2 py-1 rounded-md ml-2" id="commentCount">0</span></h4>
+                        </div>
+                        
+                        <div class="bg-cream/50 p-2 rounded-[2rem] border border-gray-100">
+                            <div id="commentsContainer" class="space-y-4 max-h-[500px] overflow-y-auto p-4 custom-scrollbar">
+                                <!-- Comments dynamically injected here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-secondary pt-16 pb-8 border-t-[6px] border-primary text-white">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8 mb-12">
+            <div>
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-black">
+                        05
+                    </div>
+                    <span class="text-xl font-display font-black">Kreasimuda Musyawarah</span>
+                </div>
+                <p class="text-slate-400 text-sm max-w-sm leading-relaxed">
+                    Wadah kepemudaan RT 05 yang terus berinovasi dan menjaga tradisi gotong royong demi lingkungan yang harmonis.
+                </p>
+            </div>
+            <div class="md:text-right flex flex-col md:items-end justify-center">
+                <p class="font-bold text-accent mb-2">Ikuti Keseruan Kami</p>
+                <a href="#" class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 rounded-xl hover:bg-primary transition-colors">
+                    <i class="fa-brands fa-instagram text-xl"></i> @kreasianakmuda.05
+                </a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-white/10 text-center md:text-left flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
+            <p>&copy; 2026 Karang Taruna Kreasimuda Musyawarah 05. All Rights Reserved.</p>
+            <p class="mt-2 md:mt-0">Dibuat dengan <i class="fa-solid fa-heart text-primary mx-1"></i> sebagai hadiah.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Scroll Animations (Intersection Observer) ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // --- Sticky Navbar Background Change ---
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('mt-4');
+            } else {
+                navbar.classList.remove('py-2');
+                navbar.classList.add('mt-4');
+            }
+        });
+
+        // --- Mobile Menu Toggle ---
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileBtn.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                setTimeout(() => mobileMenu.classList.remove('opacity-0'), 10);
+            } else {
+                mobileMenu.classList.add('opacity-0');
+                setTimeout(() => mobileMenu.classList.add('hidden'), 300);
+            }
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('opacity-0');
+                setTimeout(() => mobileMenu.classList.add('hidden'), 300);
+            });
+        });
+
+        // --- Comments Functionality (LocalStorage) ---
+        const dummyComments = [
+            { id: 1, name: "Bapak Ketua RT", role: "Warga RT 05", msg: "Website yang sangat keren! Semoga Kreasimuda semakin kompak dan inovatif.", date: "Beberapa jam lalu" },
+            { id: 2, name: "Siti K.", role: "Pemuda / Anggota", msg: "Wah ada galeri fotonya, jadi kangen momen trip bareng ke Pangalengan kemarin 🤩", date: "Kemarin" },
+            { id: 3, name: "Tim Cimory", role: "Sponsor", msg: "Bangga bisa support acara Karang Taruna 05. Tetap semangat anak muda!", date: "2 Hari lalu" }
+        ];
+
+        const form = document.getElementById('commentForm');
+        const container = document.getElementById('commentsContainer');
+        const countSpan = document.getElementById('commentCount');
+        const STORAGE_KEY = 'kreasimuda_comments';
+
+        function loadComments() {
+            let comments = JSON.parse(localStorage.getItem(STORAGE_KEY));
+            if (!comments) {
+                comments = dummyComments;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+            }
+            return comments;
+        }
+
+        function saveComment(name, role, msg) {
+            const comments = loadComments();
+            const newComment = {
+                id: Date.now(),
+                name: name,
+                role: role,
+                msg: msg,
+                date: "Baru saja"
+            };
+            comments.unshift(newComment); // add to top
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+            renderComments();
+        }
+
+        function renderComments() {
+            const comments = loadComments();
+            countSpan.innerText = comments.length;
+            container.innerHTML = '';
+
+            comments.forEach((c, index) => {
+                // Escape HTML
+                const safeName = c.name.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                const safeRole = c.role.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                const safeMsg = c.msg.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+                let roleColor = 'text-primary bg-primary/10';
+                if(c.role === 'Sponsor') roleColor = 'text-accent bg-accent/10';
+                else if(c.role === 'Tamu') roleColor = 'text-secondary bg-secondary/10';
+
+                // Add staggered animation delay for newly loaded items
+                const animDelay = index < 5 ? `style="animation: fadeUp 0.5s ease forwards ${index * 0.1}s; opacity: 0;"` : '';
+
+                const html = `
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 transform transition-all hover:shadow-md hover:-translate-y-1" ${animDelay}>
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-cream flex items-center justify-center font-black text-secondary uppercase border border-gray-100">
+                                    ${safeName.charAt(0)}
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-secondary text-sm">${safeName}</h5>
+                                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-md ${roleColor}">${safeRole}</span>
+                                </div>
+                            </div>
+                            <span class="text-[10px] text-gray-400"><i class="fa-regular fa-clock"></i> ${c.date}</span>
+                        </div>
+                        <p class="text-secondary/80 text-sm mt-3 leading-relaxed">${safeMsg}</p>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        // Add CSS keyframe dynamically for comments
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeUp {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('guestName').value;
+            const role = document.getElementById('guestRole').value;
+            const msg = document.getElementById('guestMsg').value;
+            
+            saveComment(name, role, msg);
+            
+            // Show feedback and clear
+            const btn = form.querySelector('button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Terkirim!';
+            btn.classList.replace('bg-secondary', 'bg-green-600');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.replace('bg-green-600', 'bg-secondary');
+                form.reset();
+            }, 2000);
+        });
+
+        // Init
+        renderComments();
+    </script>
+</body>
+</html>
